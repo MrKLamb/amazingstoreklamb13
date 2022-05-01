@@ -1,5 +1,5 @@
 <?php
-require_once '../..' . '/AutoLoader.php';
+require_once 'AutoLoader.php';
 require_once 'util_funcs.php'
 ?>
 
