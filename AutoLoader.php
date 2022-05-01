@@ -25,7 +25,7 @@ spl_autoload_register(function($className)
 	// include_once '../..' . DIRECTORY_SEPARATOR . $className . '.php';
 	// include_once $className . '.php';
 
-	include_once str_replace("\\", DIRECTORY_SEPARATOR, $className) . 'php';
+	include_once __DIR__ . DIRECTORY_SEPARATOR . str_replace("\\", DIRECTORY_SEPARATOR, $className) . '.php';
 });
 
 ?>
