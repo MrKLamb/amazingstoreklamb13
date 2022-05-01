@@ -42,7 +42,7 @@ class Database
 		// $db_password = "6#vWHD_$";
 
 		// Define azure / publish database connection parameters
-		$connect_string = 'mysql:unix_socket=/cloudsql/cst-323;dbname=cst-323';
+		$connect_string = 'mysql:dbname=cst-323;unix_socket=/cloudsql/amazingstoreklamb13a:us-west2:cst-323';
 		$db_username = "root";
 		$db_password = "1Database4Me!";
 
