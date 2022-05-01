@@ -1,6 +1,6 @@
 <?php
 namespace classes\database;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/AutoLoader.php';
+require_once '../..' . '/AutoLoader.php';
 
 /*
  * ---------------------------------------------------------------
@@ -42,7 +42,7 @@ class Database
 		// $db_password = "6#vWHD_$";
 
 		// Define azure / publish database connection parameters
-		$connect_string = 'mysql:host=35.236.7.10:3306;dbname=cst-323';
+		$connect_string = 'mysql:unix_socket=/cloudsql/cst-323;dbname=cst-323';
 		$db_username = "root";
 		$db_password = "1Database4Me!";
 

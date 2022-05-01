@@ -1,6 +1,6 @@
 <?php
 namespace classes\view;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/AutoLoader.php';
+require_once '../..' . '/AutoLoader.php';
 include_once '../../header.php';
 include_once '../../securePage.php';
 ?>

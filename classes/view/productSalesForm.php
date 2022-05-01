@@ -1,6 +1,6 @@
 <?php
 namespace classes\view;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/AutoLoader.php';
+require_once '../..' . '/AutoLoader.php';
 ?>
 
 <!DOCTYPE html>

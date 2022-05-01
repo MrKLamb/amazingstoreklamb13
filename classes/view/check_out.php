@@ -2,7 +2,7 @@
 namespace classes\view;
 use classes;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/AutoLoader.php';
+require_once '../..' . '/AutoLoader.php';
 
 /*
  * ---------------------------------------------------------------

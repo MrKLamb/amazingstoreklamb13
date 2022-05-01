@@ -1,0 +1,18 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: ./
+
+beta_settings:
+  cloud_sql_instances: amazingstoreklamb13a:us-west2:cst-323
+
+env_variables:
+  APP_LOG: errorlog
+  APP_KEY: base64:zgKgU0LfWoprS5dAg75Zc8qi0Cbl1+C9lcQz+inLg80=
+
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 0.25
+  memory_gb: 0.50

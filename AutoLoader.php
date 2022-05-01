@@ -16,15 +16,16 @@
  * ---------------------------------------------------------------
  */
 
-spl_autoload_register(function($className) {
+spl_autoload_register(function($className)
+{
+	// echo "INSIDE AutoLoader - Step 1<br />\r\n";
+	// echo __DIR__ . DIRECTORY_SEPARATOR . $className . "<br />\r\n";
+	// $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
+	// include_once __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
+	// include_once '../..' . DIRECTORY_SEPARATOR . $className . '.php';
+	// include_once $className . '.php';
 
-      //  echo "INSIDE AutoLoader - Step 1<br />\r\n";
-      //  echo __DIR__ . DIRECTORY_SEPARATOR . $className . "<br />\r\n";
-
-    $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
-    // include_once __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $className . '.php';
-
+	include_once str_replace("\\", DIRECTORY_SEPARATOR, $className) . 'php';
 });
 
 ?>

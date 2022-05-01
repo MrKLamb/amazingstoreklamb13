@@ -1,7 +1,7 @@
 <?php
 namespace classes\view;
 use classes;
-require_once $_SERVER['DOCUMENT_ROOT'] . '/AutoLoader.php';
+require_once '../..' . '/AutoLoader.php';
 session_start();
 require_once '../../util_funcs.php';
 ?>
