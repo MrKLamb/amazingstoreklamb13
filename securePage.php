@@ -7,7 +7,7 @@
  * Class     : CST-323 Cloud Computing
  * Professor : Bradley Mauger PhD
  * Assignment: Activity Application
- * Disclaimer: This is my own work
+ * Disclaimer: This is my own work - KLamb
  * ---------------------------------------------------------------
  * Description:
  * 1. Page Level Security
