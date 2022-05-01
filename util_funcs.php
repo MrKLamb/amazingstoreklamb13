@@ -30,9 +30,14 @@ function dbConnect() {
     // $db_password = "root";
 
     // Define azure / publish database connection parameters
-    $connect_string = 'mysql:host=127.0.0.1:55956;dbname=cst-323';
-    $db_username = "azure";
-    $db_password = "6#vWHD_$";
+    // $connect_string = 'mysql:host=127.0.0.1:55956;dbname=cst-323';
+    // $db_username = "azure";
+    // $db_password = "6#vWHD_$";
+
+    // Define azure / publish database connection parameters
+    $connect_string = 'mysql:host=35.236.7.10:3306;dbname=cst-323';
+    $db_username = "root";
+    $db_password = "1Database4Me!";
 
     try
     {
