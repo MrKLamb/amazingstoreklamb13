@@ -1,4 +1,7 @@
 <?php
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+require 'vendor/autoload.php';
 
 /*
  * ---------------------------------------------------------------
@@ -7,7 +10,7 @@
  * Class     : CST-323 Cloud Computing
  * Professor : Bradley Mauger PhD
  * Assignment: Activity Application
- * Disclaimer: This is my own work - KLamb
+ * Disclaimer: This is my own work
  * ---------------------------------------------------------------
  * Description:
  * 1. util_funcs.php - a collection of functions
@@ -34,10 +37,16 @@ function dbConnect() {
     // $db_username = "azure";
     // $db_password = "6#vWHD_$";
 
-    // Define azure / publish database connection parameters
+    // Define heroku / publish database connection parameters
+    // $connect_string = 'mysql:host=u6354r3es4optspf.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306;dbname=y7llsgwldz49763a';
+    // $db_username = "lcm3za4yg1447b7a";
+    // $db_password = "n1otv5d1jll4eam7";
+
+    // Define google cloud / publish database connection parameters
     $connect_string = 'mysql:dbname=cst-323;unix_socket=/cloudsql/amazingstoreklamb13a:us-west2:cst-323';
     $db_username = "root";
     $db_password = "1Database4Me!";
+
 
     try
     {
@@ -56,38 +65,62 @@ function dbConnect() {
 
 function saveUserId($id)
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     $_SESSION["USER_ID"] = $id;
 }
 
 function getUserId()
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     return $_SESSION["USER_ID"];
 }
 
 function saveUserInfo($user_info_array)
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     $_SESSION["USER_INFO"] = $user_info_array;
 }
 
 function getUserInfo()
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     return $_SESSION["USER_INFO"];
 }
 
 function saveSearchInfo($search_info_array)
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     $_SESSION["SEARCH_INFO"] = $search_info_array;
 }
 
 function getSearchInfo()
 {
-    session_start();
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     return $_SESSION["SEARCH_INFO"];
+}
+
+
+function saveLogger($logger)
+{
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    $_SESSION["LOGGER"] = $logger;
+}
+
+function getLogger()
+{
+	if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    return $_SESSION["LOGGER"];
+}
+
+/* DEFINE LOGGER - IF NEEDED */
+$logger = getLogger();
+if (! isset($logger))
+{
+	$logger = new Logger('AmazingStore');
+	$logger->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'] . '/logs/app.log', Logger::DEBUG));
+	//$logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
+	saveLogger($logger);
+	$logger->info('Logger is now Ready');
 }
 
 ?>

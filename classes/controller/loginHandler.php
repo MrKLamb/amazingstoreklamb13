@@ -1,9 +1,11 @@
 <?php
 namespace classes\controller;
 use classes;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 require_once '../..' . '/AutoLoader.php';
-
+require '../..' . '/vendor/autoload.php';
 /*
  * ---------------------------------------------------------------
  * Name      : Kelly E. Lamb
@@ -14,7 +16,7 @@ require_once '../..' . '/AutoLoader.php';
  * Disclaimer: This is my own work
  * ---------------------------------------------------------------
  * Description:
- * 1. AmazingStoreKLamb13 - Handle Login Entry
+ * 1. AmazingStore - Handle Login Entry
  * 2. Obtain form data
  * 3. Handle Login Validation
  * ---------------------------------------------------------------
@@ -22,6 +24,10 @@ require_once '../..' . '/AutoLoader.php';
 
 include_once '../../header.php';
 require_once('../../util_funcs.php');
+
+// LOGGER DEFINE in util_funcs - placed in session
+$logger = getLogger();
+$logger->info(basename(__FILE__, '.php') . "::login: Enter");
 
 // store registration parameters
 $email    = filter_input(INPUT_POST,'Email');
@@ -35,12 +41,14 @@ $valid_input = true;
 if (is_null($email) || empty($email)) {
     $valid_input = false;
     echo "The Email field is a required field and cannot be blank.<br />";
+    $logger->info("loginHandler::login: Login Failed: Email Blank");
 }
 
 // Validate password
 if (is_null($password) || empty($password)) {
     $valid_input = false;
     echo "The Password field is a required field and cannot be blank.<br />";
+    $logger->info(get_class($this) . "::login: Login Failed: Password Blank");
 }
 
 // Clear the search criteria at login - eases logic for blog display
@@ -54,6 +62,7 @@ if ($valid_input)
     {
         // Test Security Service - Validate Login Functionality
         $service = new classes\business\SecurityService();
+        $service = new classes\utility\LogInterceptor($service); // Try Interceptor Logging
         $validLogin = $service->authenticate($email, $password);
 
         // Get Database Connection
@@ -79,11 +88,13 @@ if ($valid_input)
             // Save User ID in Session
             saveUserId($row[0]["ID"]);
             saveUserInfo($row);
+		    $logger->info(basename(__FILE__, '.php') . "::login: Successful");
             header('Location: ../../index.php'); // Redirect to home page on success
         }
         elseif ($num_rows === 0 || $num_rows >= 2)
         {
             // Invalid user
+		    $logger->info(basename(__FILE__, '.php') . "::login: Failed: Invalid User");
             $_SESSION["principle"] = false;
             include('../view/loginFailed.php ');
         }
@@ -91,6 +102,7 @@ if ($valid_input)
     {
         $error_message = $e->getMessage();
         include('../database/database_error.php');
+	    $logger->error(basename(__FILE__, '.php') . "::login: Database: " . $error_message);
         exit();
     }
 
@@ -98,6 +110,8 @@ if ($valid_input)
     $statement1->closeCursor();
     $statement1 = null;
     $db = null;
+
+    $logger->info(basename(__FILE__, '.php') . "::login: Exit");
 }
 
 ?>
